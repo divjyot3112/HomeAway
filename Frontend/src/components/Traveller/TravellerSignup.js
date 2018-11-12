@@ -42,13 +42,14 @@ class Signup extends Component{
     }
 
     render(){
-        let redirect = null;
-        if(this.state.created){
-            redirect = <Redirect to= "/profile"/>
+        let redirectVar = null;
+
+        if(localStorage.getItem('email')) {
+            redirectVar = <Redirect to= "/profile"/>
         }
         return(
             <div>
-                {redirect}
+                {redirectVar}
                 <TravellerNavbar/>
                 <div id="container">
                     <div id="login-container">

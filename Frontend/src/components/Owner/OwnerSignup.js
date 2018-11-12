@@ -42,13 +42,14 @@ class Signup extends Component{
     }
 
     render(){
-        let redirect = null;
-        if(this.state.created){
-            redirect = <Redirect to= "/profile"/>
+        let redirectVar = null;
+
+        if(localStorage.getItem('email') && localStorage.getItem('flag')==='o'){
+            redirectVar = <Redirect to= "/ownerdash"/>
         }
         return(
             <div>
-                {redirect}
+                {redirectVar}
 
                 <div id="container">
                     <div id="login-container">

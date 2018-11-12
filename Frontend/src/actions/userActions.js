@@ -35,6 +35,8 @@ export const signupUser = data => dispatch => {
         .then(res => {
             if(res.status === 200){
                 console.log(res.status);
+                localStorage.setItem('email', res.data.email);
+                localStorage.setItem('flag', res.data.flag);
                 dispatch({
                     type: SIGNUP_USER,
                     payload: res.data
