@@ -44,7 +44,7 @@ class Signup extends Component{
     render(){
         let redirectVar = null;
 
-        if(localStorage.getItem('email')) {
+        if(localStorage.getItem('email') && localStorage.getItem('flag')==='t'){
             redirectVar = <Redirect to= "/profile"/>
         }
         return(

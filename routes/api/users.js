@@ -14,16 +14,21 @@ const Image = require('../../models/Image');
 // @route   POST api/users/login
 // @desc    Login User
 // @access  Public
-router.post('/login'/*, passport.authenticate('jwt', { session: false })*/, (req, res) => {
+router.post('/login', (req, res) => {
     console.log('Inside Login Post Request');
     console.log(req.body.email, req.body.password);
     
-    User.findOne({ email: req.body.email, password: req.body.password, flag: req.body.flag })
+    User.findOne({ email: req.body.email, flag: req.body.flag })
         .then(user => {
             if(user) { 
-                res.cookie('cookie', req.body.email, {maxAge: 900000, httpOnly: false, path : '/'});
-                res.status(200).json(user); 
-                console.log(cookie.load('cookie'));
+                
+                user.comparePassword(req.body.password, function(err, isMatch) {
+                    if(isMatch && !err) {
+                        res.status(200).json(user); 
+                    } else {
+                        res.status(400).send();
+                    }
+                });
             }
             else { res.status(404).send(); }
         })
@@ -34,7 +39,7 @@ router.post('/login'/*, passport.authenticate('jwt', { session: false })*/, (req
 // @desc    Signup User
 // @access  Public
 router.post('/signup', (req, res) => {
-    console.log('Inside Signup Post Request');
+    console.log('Inside Signup Post Request', req.body.password);
     const newUser = new User({
         email: req.body.email,
         password: req.body.password,
@@ -54,7 +59,7 @@ router.post('/signup', (req, res) => {
         .catch(err => { console.log(err); res.status(400).send() })
 });
 
-// @route   GET api/users/signup
+// @route   GET api/users/getUser
 // @desc    Get User
 // @access  Public
 router.post('/getUser', (req, res) => {
@@ -68,8 +73,9 @@ router.post('/getUser', (req, res) => {
         .catch(err => console.log(err))
 })
 
+/*
 // Authenticate the user and get a JWT
-router.post('/login', (req, res) => {
+router.post('/authenticate', (req, res) => {
     User.findOne({
         email: req.body.email
     }, function(err, user) {
@@ -91,6 +97,7 @@ router.post('/login', (req, res) => {
         }      
     });
 });
+*/
 
 // @route   POST api/users/profile
 // @desc    Update User Profile

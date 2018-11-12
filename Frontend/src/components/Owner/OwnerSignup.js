@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import cookie from 'react-cookies';
 import {Redirect} from 'react-router';
 import {Link} from 'react-router-dom';
-/*import Navbar from '../Navbar/Navbar';*/
+import OwnerNavbar from './OwnerNavbar';
 import { Col, Row, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { signupUser } from '../../actions/userActions';
 import { connect } from 'react-redux';
@@ -50,7 +50,7 @@ class Signup extends Component{
         return(
             <div>
                 {redirectVar}
-
+                <OwnerNavbar />
                 <div id="container">
                     <div id="login-container">
                         <div className="login-header traveler">
