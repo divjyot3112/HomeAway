@@ -46,7 +46,8 @@ router.post('/signup', (req, res) => {
         school: "",
         hometown: "",
         languages: "",
-        gender: ""
+        gender: "",
+        flag: req.body.flag
     });
     newUser.save()
         .then(user => { res.status(200).json(user); })
