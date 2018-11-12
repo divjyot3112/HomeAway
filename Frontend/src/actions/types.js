@@ -1,0 +1,10 @@
+/*export const USER_LOADING = 'USER_LOADING';*/
+export const LOGIN_USER = 'LOGIN_USER';
+export const SIGNUP_USER = 'SIGNUP_USER';
+export const GET_USER = 'GET_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
+export const POST_PROFILE = 'POST_PROFILE';
+export const POST_PROPERTY = 'POST_PROPERTY';
+export const GET_IMAGES = 'GET_IMAGES';
+export const POST_IMAGES = 'POST_IMAGES';
+export const SEARCH_PROPERTIES = 'SEARCH_PROPERTIES';
