@@ -35,11 +35,11 @@ app.use(function(req, res, next) {
     next();
 });
 
- // DB Config
- const db = require('./config/keys').mongoURI;
+// DB Config
+const db = require('./config/keys').mongoURI;
 
- // Connect to Mongo
- mongoose
+// Connect to Mongo
+mongoose
     .connect(db)
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err));

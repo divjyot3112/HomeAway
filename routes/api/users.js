@@ -137,21 +137,6 @@ router.post('/searchProperties', (req, res) => {
     .catch(err => { console.log(err); res.status(400) })
 });
 
-// Set Storage Engine
-const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null,'./public/uploads')
-    },
-    filename: function(req, file, cb){
-        cb(null, file.originalname + '-' + Date.now() + path.extname(file.originalname));
-    }
-})
-
-// Init upload variable
-const upload = multer({
-    storage: storage
-}).array('images', 5);
-
 // @route   POST api/users/postProperty
 // @desc    Post Property
 // @access  Public
@@ -183,6 +168,21 @@ router.post('/postProperty', (req, res) => {
         .catch(err => { console.log(err); res.status(400).send() })
 });
 
+// Set Storage Engine
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null,'./public/uploads')
+    },
+    filename: function(req, file, cb){
+        cb(null, file.originalname + '-' + Date.now() + path.extname(file.originalname));
+    }
+})
+
+// Init upload variable
+const upload = multer({
+    storage: storage
+}).array('images', 5);
+
 // @route   POST api/users/postImages
 // @desc    Post Images of property
 // @access  Public
@@ -204,28 +204,6 @@ router.post('/postImages', (req, res) => {
                 });
 
                 newImage.save().then(image => res.status(200));
-
-                /*
-                User.findOne({email: req.body.email}, (err, user) => {
-                    if(err) { console.log(err); res.status(400).send(); }
-                    else{
-                        var i=0;
-                        var property = [];
-                        for(i=0; i<user.properties.length;i++){
-                            if(user.properties[i]._id=req.body.currentPropertyId){
-                                property=user.properties[i];
-                                break;
-                            }
-                        }
-                        property.images=newValues;
-                        console.log(property);
-                        console.log(i);
-                        User.findOneAndUpdate({email:req.body.email},
-                            { $push: {'User.properties[i].images': newValues } },
-                            {new: true})
-                    }
-                })*/
-
         }
     });
     
